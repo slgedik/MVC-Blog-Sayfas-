@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebApplication2.Models.BlogModel>
+
+@foreach (var blog in Model)
+{
+    <div class="blogItem">
+        <h3 class="page-header">
+            @blog.Baslik
+        </h3>
+        <p>
+            <span class="glyphicon glyphicon-time"></span>
+            @blog.EklenmeTarihi
+        </p>
+        <img src="@blog.Resim" width="700" height="450" />
+        <hr />
+        <p>
+            @blog.Aciklama
+        </p>
+        @Html.ActionLink("Daha Fazla", "Details", "Blog", new { id = @blog.Id }, new { @class = "btn btn-primary" })
+
+
+    </div>
+}

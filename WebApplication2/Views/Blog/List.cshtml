@@ -1,0 +1,24 @@
+﻿@model IEnumerable<WebApplication2.Models.BlogModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tüm Blog Listesi</h2>
+
+@Html.Partial("BlogListesi", Model)
+
+@section SagKolon
+ {
+    @Html.Partial("Search")
+
+    @{Html.RenderAction("KategoriListesi", "Category");}
+
+    <p>
+        @Html.ActionLink("Blogları Düzenle", "/", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Blog Ekle", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+}
+
+

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<WebApplication2.Models.Blog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Blog Listesi</h2>
+<hr/>
+
+@if(TempData["Blog"] != null)
+{
+    var blog = (WebApplication2.Models.Blog)TempData["Blog"];
+    <div class="alert alert-success" role="alert">
+        <strong> 
+            <span class="glyphicon glyphicon-ok"/>
+            @blog.Baslik
+        </strong>
+        Kayıt Edildi.
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Blog Ekle", "Create",null,new {@class="btn btn-primary" })
+</p>
+<table class="table table-bordered table-hover table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.KategoriAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Baslik)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Resim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EklenmeTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Onay)
+        </th>
+        <th >
+            @Html.DisplayNameFor(model => model.Anasayfa)
+        </th>
+        <th style="width: 170px"></thstyle="width:>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.KategoriAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Baslik)
+        </td>
+        
+       
+        <td>
+            <img src="@item.Resim"  width="100" height="100"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EklenmeTarihi)
+        </td>
+        <td>
+            @if (item.Onay)
+            {
+                <label class="label label-success"> Onaylı</label>
+            }
+            else
+            {
+                <label class="label label-danger"> Onay Bekliyor</label>
+            }
+        </td>
+        <td>
+            @if (item.Anasayfa)
+            {
+                <label class="label label-success"> Anasayfa </label>
+            }
+            else
+            {
+                <label class="label label-danger"> Anasayfa Değil</label>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+        </td>
+    </tr>
+}
+
+</table>
